@@ -8,11 +8,65 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.DataContext>
-        <vm:DashboardNoActiveBookViewModel/>
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="CreateNewLogbookButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#FF6073E9"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border>
+                            <ContentPresenter HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF975EDD"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     
     <Grid>
-        <Label Content="DashboardNoActiveBookView"/>
+        
+        <!--#region Rows and Columns-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+        
+        
+        <!--#region Backgrond-->
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="../rsc/img/sime-basioli-BRkikoNP0KQ-unsplash.jpg"
+                Opacity="0.15"/>
+        </Grid.Background>
+        <!---#endregion-->
+        
+        
+        <!--#region Labels-->
+        <Label
+            Content="No active logbook"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            FontFamily="{StaticResource GlobalFontFamily}"
+            FontSize="28"/>
+        <Button
+            Content="Create new logbook"
+            Grid.Row="1"
+            Style="{StaticResource CreateNewLogbookButtonStyle}"
+            Command="{Binding CreateNewLogbookButtonClickCommand}"/>
+        <!--#endregion-->
+        
     </Grid>
 </UserControl>

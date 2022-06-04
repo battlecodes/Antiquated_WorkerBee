@@ -9,11 +9,14 @@ using WorkerBee.ViewModels;
 
 namespace WorkerBee.Navigation
 {
-    internal class NavigationManager : INavigate, INotifyPropertyChanged
+    public class NavigationStore
     {
 
+        public event Action? CurrentContentViewModelChanged;
+
+
         #region Fields
-        private ViewModelBase _currentContentViewModel;
+        private ViewModelBase? _currentContentViewModel;
         #endregion
 
 
@@ -22,36 +25,27 @@ namespace WorkerBee.Navigation
         public ViewModelBase CurrentContentViewModel
         {
             get => _currentContentViewModel;
-            [MemberNotNull(nameof(_currentContentViewModel))]
             set
             {
                 _currentContentViewModel = value ?? throw new ArgumentNullException(nameof(value));
-                OnPropertyChanged("CurrentContentViewModel");
+                OnCurrentContentViewModelChanged();
             }
         }
         #endregion
 
 
-        #region Event Handlers
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        #endregion
+        #region Public Methods
 
-
-        #region Constructors
-
-        public NavigationManager(ViewModelBase viewModel)
-        {
-            CurrentContentViewModel = viewModel;
-        }
+        
         #endregion
 
 
         #region Private Methods
 
-        private void OnPropertyChanged(string? name = null)
+        private void OnCurrentContentViewModelChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            CurrentContentViewModelChanged?.Invoke();
         }
         #endregion
     }

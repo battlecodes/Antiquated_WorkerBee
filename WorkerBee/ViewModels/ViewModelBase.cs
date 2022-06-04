@@ -11,7 +11,7 @@ namespace WorkerBee.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void OnPropertyChanged(string? name = null)
+        public virtual void OnPropertyChanged(string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

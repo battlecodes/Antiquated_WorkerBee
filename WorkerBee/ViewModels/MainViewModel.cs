@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -12,23 +13,25 @@ namespace WorkerBee.ViewModels
     {
 
         #region Fields
-        private NavigationManager _navigationManager;
         
-        private ViewModelBase _currentContentViewModel;
+        private NavigationStore _navigationStore;
+
+        private String _statusBarText = "";
         #endregion
 
 
         #region Properties
 
-        public ViewModelBase CurrentContentViewModel
+        public ViewModelBase CurrentContentViewModel => _navigationStore.CurrentContentViewModel;
+
+
+        public String StatusBarText
         {
-            get => _currentContentViewModel;
-            [MemberNotNull(nameof(_currentContentViewModel))]
+            get => _statusBarText;
             set
             {
-                _currentContentViewModel = value ??
-                    throw new ArgumentNullException(nameof(value));
-                OnPropertyChanged("CurrentContentViewModel");
+                _statusBarText = value;
+                OnPropertyChanged("StatusBarText");
             }
         }
         #endregion
@@ -36,13 +39,14 @@ namespace WorkerBee.ViewModels
 
         #region Constructors
 
-        public MainViewModel()
+        public MainViewModel(NavigationStore navigationStore)
         {
-            
+
 
             /// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
-            _navigationManager = new NavigationManager(new DashboardViewModel());
-            CurrentContentViewModel = _navigationManager.CurrentContentViewModel;
+            _navigationStore = navigationStore;
+
+            _navigationStore.CurrentContentViewModelChanged += OnCurrentContentViewModelChanged;
         }
         #endregion
 
@@ -50,6 +54,15 @@ namespace WorkerBee.ViewModels
         #region Public Methods
 
 
+        #endregion
+
+
+        #region Private Methods
+
+        private void OnCurrentContentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentContentViewModel));
+        }
         #endregion
     }
 }

@@ -11,13 +11,77 @@
         Width="800"
         WindowStartupLocation="CenterScreen">
 
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
-    
     <Grid>
+        
+        <!--#region Rows and Columns-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ContentControl Content="{Binding CurrentContentViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+        
+        <!--#region Menu-->
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem
+                Header="_File">
+                <MenuItem
+                    Header="_New Logbook"/>
+                <MenuItem
+                    Header="_Open Logbook"/>
+                <MenuItem
+                    Header="_Save Logbook"/>
+                <Separator/>
+                <MenuItem
+                    Header="E_xit"/>
+            </MenuItem>
+            <MenuItem
+                Header="Tools">
+                <MenuItem
+                    Header="Project _Manager"/>
+            </MenuItem>
+        </Menu>
+        <!--#endregion-->
+        
+        
+        <!--#region Navigation Pane-->
+        <Border
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Background="#FF282A30"
+            Width="125">
+            <StackPanel>
+                <Label
+                    Content="Code Caddy"
+                    Background="#FF18B29C"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="{StaticResource GlobalFontFamily}"
+                    FontSize="16"
+                    FontWeight="Bold"/>
+                <Button
+                    Content="Dashboard"
+                    Margin="0,20,0,0"
+                    Style="{StaticResource NavButtonStyle}"/>
+                <Button
+                    Content="View 1"
+                    Style="{StaticResource NavButtonStyle}"/>
+            </StackPanel>
+        </Border>
+        <!--#endregion-->
+        
+        
+        <!--#region Content Viewer Pane-->
+        <ContentControl
+            Content="{Binding CurrentContentViewModel}"
+            Grid.Row="1"
+            Grid.Column="1">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type vm:DashboardNoActiveBookViewModel}">
                     <local:DashboardNoActiveBookView/>
@@ -25,8 +89,24 @@
                 <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
                     <local:DashboardView/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:CreateNewBookViewModel}">
+                    <local:CreateNewBookView/>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
+        <!--#endregion-->
+        
+        
+        <!--#region Status Bar-->
+        <StatusBar
+            Grid.Row="2"
+            Grid.Column="1">
+            <StatusBarItem HorizontalAlignment="Right">
+                <Label
+                    Style="{StaticResource StatusBarLabelStyle}"/>
+            </StatusBarItem>
+        </StatusBar>
+        <!--#endregion-->
         
     </Grid>
     

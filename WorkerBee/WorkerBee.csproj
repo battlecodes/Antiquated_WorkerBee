@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="rsc\img\sime-basioli-BRkikoNP0KQ-unsplash.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="rsc\img\sime-basioli-BRkikoNP0KQ-unsplash.jpg" />
+  </ItemGroup>
+
 </Project>
