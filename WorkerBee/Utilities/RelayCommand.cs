@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WorkerBee.Utilties
+namespace WorkerBee.Utilities
 {
     public class RelayCommand : ICommand
     {

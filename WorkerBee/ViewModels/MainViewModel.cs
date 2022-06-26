@@ -63,6 +63,13 @@ namespace WorkerBee.ViewModels
         {
             OnPropertyChanged(nameof(CurrentContentViewModel));
         }
+
+
+        private void OnStatusUpdate()
+        {
+            /// I need an event that passes arguments so that I can get a status message here!
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

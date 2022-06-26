@@ -92,7 +92,7 @@
                         <TextBox
                             x:Name="SaveLocationTextBox"
                             Margin="0,0,5,0"
-                            Text="{Binding SaveLocationText}"/>
+                            Text="{Binding SaveLocationText, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button
                             Content="Browse"
                             Width="75"
@@ -144,7 +144,7 @@
                         Content="Create Logbook"
                         Style="{StaticResource EntryFieldButtonStyle}"
                         Command="{Binding CreateButtonClickCommand}"
-                        IsEnabled="{Binding IsCreatePossible, Mode=TwoWay}"/>
+                        IsEnabled="{Binding IsCreatePossible}"/>
                 </StackPanel>
                 <!--#endregion-->
                 

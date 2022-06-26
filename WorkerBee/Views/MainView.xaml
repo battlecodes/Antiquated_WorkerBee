@@ -103,6 +103,7 @@
             Grid.Column="1">
             <StatusBarItem HorizontalAlignment="Right">
                 <Label
+                    Content="{Binding StatusBarText}"
                     Style="{StaticResource StatusBarLabelStyle}"/>
             </StatusBarItem>
         </StatusBar>

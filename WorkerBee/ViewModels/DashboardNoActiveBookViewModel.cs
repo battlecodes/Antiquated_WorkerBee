@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WorkerBee.Navigation;
-using WorkerBee.Utilties;
+using WorkerBee.Utilities;
 
 namespace WorkerBee.ViewModels
 {
@@ -26,14 +26,15 @@ namespace WorkerBee.ViewModels
 
         #region Constructors
 
-        public DashboardNoActiveBookViewModel(NavigationStore navigationStore)
+        public DashboardNoActiveBookViewModel(BookStore bookStore, NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
 
             // Instantiate commands.
             CreateNewLogbookButtonClickCommand = new
-                NavigateCommand<CreateNewBookViewModel>(navigationStore,
-                () => new CreateNewBookViewModel(navigationStore));
+                NavigateCommand<CreateNewBookViewModel>(
+                new NavigationService<CreateNewBookViewModel>(_navigationStore,
+                () => new CreateNewBookViewModel(bookStore, navigationStore)));
 
         }
         #endregion

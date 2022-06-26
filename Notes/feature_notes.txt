@@ -1,0 +1,2 @@
+***** CreateNewBookViewModel *****
+- The SaveLocationText should be set the user's "save location" preference.
