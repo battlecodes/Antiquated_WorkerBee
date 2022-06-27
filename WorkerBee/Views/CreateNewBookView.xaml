@@ -4,40 +4,71 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WorkerBee.Views"
+             xmlns:vm="clr-namespace:WorkerBee.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450"
-             d:DesignWidth="800"
-             FocusManager.FocusedElement="{Binding ElementName=SaveLocationTextBox}">
+             d:DesignWidth="800">
 
     <UserControl.Resources>
+        <!--Button Styles-->
         <Style x:Key="EntryFieldButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="0,5,5,0"/>
         </Style>
+        
+        <!--DatePicker Styles-->
         <Style TargetType="DatePicker">
             <Setter Property="HorizontalAlignment" Value="Left"/>
+            <!--Validation Styles-->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+        
+        <!--Label Styles-->
         <Style TargetType="Label">
             <Setter Property="Padding" Value="0,5,5,5"/>
         </Style>
-        <Style TargetType="TextBox">
+
+        <Style x:Key="TitleLabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!--TextBox Styles-->
+        <Style TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="250"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
+        
+        <Style x:Key="NameTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <!--Validation Styles-->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!--StackPanel Styles-->
         <Style TargetType="StackPanel">
             <Setter Property="Margin" Value="10,0,10,0"/>
         </Style>
+        
+        <!--Border Styles-->
         <Style x:Key="EntryFieldBorderStyle" TargetType="Border">
             <Setter Property="Height" Value="350"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Background" Value="#FFE2E2E2"/>
-        </Style>
-        <Style x:Key="TitleLabelStyle" TargetType="Label">
-            <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </UserControl.Resources>
     
@@ -92,7 +123,7 @@
                         <TextBox
                             x:Name="SaveLocationTextBox"
                             Margin="0,0,5,0"
-                            Text="{Binding SaveLocationText}"/>
+                            Text="{Binding SaveLocationText, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button
                             Content="Browse"
                             Width="75"
@@ -100,22 +131,79 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel
+                    Grid.Row="2"
+                    Height="58">
                     <Label Content="Name"/>
                     <TextBox
-                        Text="{Binding NameText, UpdateSourceTrigger=PropertyChanged}"/>
+                        x:Name="NameTextBox"
+                        Style="{StaticResource NameTextBoxStyle}"
+                        IsVisibleChanged="NameTextBox_IsVisibleChanged">
+                        <TextBox.Text>
+                            <Binding
+                                Path="NameText"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <!--
+                                Remove this comment to add validation to the Name textbox
+                                which creates a tooltip explaining to the user that a name
+                                is required.
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                                -->
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    
+                    <!--NameTextBox Watermark-->
+                    <TextBlock
+                        Text="Enter name here"
+                        Foreground="DarkGray"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="10,0,0,0"
+                        IsHitTestVisible="False">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=NameTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
                     <Label Content="Start date"/>
-                    <DatePicker
-                        SelectedDate="{Binding StartDate}"/>
+                    <DatePicker>
+                        <DatePicker.SelectedDate>
+                            <Binding
+                                Path="StartDate"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4">
                     <Label Content="End date"/>
-                    <DatePicker
-                        SelectedDate="{Binding EndDate}"/>
+                    <DatePicker>
+                        <DatePicker.SelectedDate>
+                            <Binding
+                                Path="EndDate"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
                 </StackPanel>
 
                 <Label
@@ -144,7 +232,7 @@
                         Content="Create Logbook"
                         Style="{StaticResource EntryFieldButtonStyle}"
                         Command="{Binding CreateButtonClickCommand}"
-                        IsEnabled="{Binding IsCreatePossible, Mode=TwoWay}"/>
+                        IsEnabled="{Binding IsCreatePossible}"/>
                 </StackPanel>
                 <!--#endregion-->
                 

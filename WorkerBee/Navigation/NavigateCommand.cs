@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkerBee.Utilities;
+using WorkerBee.Navigation;
+using WorkerBee.Utilities.Commands;
 using WorkerBee.ViewModels;
 
 namespace WorkerBee.Navigation
@@ -11,20 +12,38 @@ namespace WorkerBee.Navigation
     public class NavigateCommand<TViewModel> : CommandBase
         where TViewModel : ViewModelBase
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
+
+        #region Fields
+        /// <summary>
+        /// This instance's <see cref="NavigationService{TViewModel}"/> instance.
+        /// </summary>
+        private readonly NavigationService<TViewModel> _navigationService;
+        #endregion
 
 
-        public NavigateCommand(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="NavigateCommand{TViewModel}"/> class.
+        /// </summary>
+        /// <param name="navigationService"></param>
+        public NavigateCommand(NavigationService<TViewModel> navigationService)
         {
-            _navigationStore = navigationStore;
-            _createViewModel = createViewModel;
+            _navigationService = navigationService;
         }
+        #endregion
 
 
+        #region Public Methods
+        /// <summary>
+        /// Calls the <see cref="NavigationService{TViewModel}.Navigate"/>
+        /// method.
+        /// </summary>
+        /// <param name="parameter"></param>
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentContentViewModel = _createViewModel();
+            _navigationService.Navigate();
         }
+        #endregion
     }
 }

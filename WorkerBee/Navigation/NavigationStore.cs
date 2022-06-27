@@ -22,7 +22,7 @@ namespace WorkerBee.Navigation
 
         #region Properties
 
-        public ViewModelBase CurrentContentViewModel
+        public ViewModelBase? CurrentContentViewModel
         {
             get => _currentContentViewModel;
             set
@@ -37,7 +37,6 @@ namespace WorkerBee.Navigation
 
         #region Public Methods
 
-        
         #endregion
 
 

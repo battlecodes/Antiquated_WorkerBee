@@ -13,7 +13,9 @@ namespace WorkerBee.ViewModels
     {
 
         #region Fields
-        
+        /// <summary>
+        /// The NavigationStore reference for this instance.
+        /// </summary>
         private NavigationStore _navigationStore;
 
         private String _statusBarText = "";
@@ -21,10 +23,15 @@ namespace WorkerBee.ViewModels
 
 
         #region Properties
-
+        /// <summary>
+        /// The current viewmodel that is the focus of the main viewer
+        /// ContentControl.
+        /// </summary>
         public ViewModelBase CurrentContentViewModel => _navigationStore.CurrentContentViewModel;
 
-
+        /// <summary>
+        /// String that defines the text of the status bar.
+        /// </summary>
         public String StatusBarText
         {
             get => _statusBarText;
@@ -38,12 +45,13 @@ namespace WorkerBee.ViewModels
 
 
         #region Constructors
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/>
+        /// class.
+        /// </summary>
+        /// <param name="navigationStore"></param>
         public MainViewModel(NavigationStore navigationStore)
         {
-
-
-            /// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
             _navigationStore = navigationStore;
 
             _navigationStore.CurrentContentViewModelChanged += OnCurrentContentViewModelChanged;
@@ -58,10 +66,20 @@ namespace WorkerBee.ViewModels
 
 
         #region Private Methods
-
+        /// <summary>
+        /// Calls the <see cref="ViewModelBase.OnPropertyChanged(string?)"/>
+        /// method.
+        /// </summary>
         private void OnCurrentContentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentContentViewModel));
+        }
+
+        
+        private void OnStatusUpdate()
+        {
+            /// I need an event that passes arguments so that I can get a status message here!
+            throw new NotImplementedException();
         }
         #endregion
     }
