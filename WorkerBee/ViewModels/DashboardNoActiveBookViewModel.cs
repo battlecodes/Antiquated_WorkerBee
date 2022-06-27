@@ -13,20 +13,31 @@ namespace WorkerBee.ViewModels
     {
 
         #region Fields
-
+        /// <summary>
+        /// The NavigationStore reference for this instance.
+        /// </summary>
         private NavigationStore? _navigationStore;
         #endregion
 
 
         #region Commands
-
+        /// <summary>
+        /// Defines the command that is bound to the "Create new
+        /// logbook" button.
+        /// </summary>
         public ICommand CreateNewLogbookButtonClickCommand { get; set; }
         #endregion
 
 
         #region Constructors
-
-        public DashboardNoActiveBookViewModel(BookStore bookStore, NavigationStore navigationStore)
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="DashboardNoActiveBookViewModel"/> class.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
+        public DashboardNoActiveBookViewModel(BookStore bookStore,
+            NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
 
@@ -37,18 +48,6 @@ namespace WorkerBee.ViewModels
                 () => new CreateNewBookViewModel(bookStore, navigationStore)));
 
         }
-        #endregion
-
-
-        #region Public Methods
-
-       
-        #endregion
-
-
-        #region Private Methods
-
-        
         #endregion
     }
 }

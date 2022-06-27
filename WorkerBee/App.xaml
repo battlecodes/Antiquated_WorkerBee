@@ -6,8 +6,10 @@
          
         <!--#region Styles-->
         
-        <!--Font Styles-->
+        <!--#region Font Styles-->
         <FontFamily x:Key="GlobalFontFamily">Century Gothic</FontFamily>
+        <Color x:Key="ElementColor">#FF3D3D3D</Color>
+        <!--#endregion-->
         
         
         <!--#region Window Styles-->
@@ -56,6 +58,71 @@
         <!--#region Label Styles-->
         <Style x:Key="StatusBarLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="9"/>
+        </Style>
+
+        <Style x:Key="ElementLabelTextStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="{StaticResource GlobalFontFamily}"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource ElementColor}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PaneTitleLabelStyle" TargetType="Label" BasedOn="{StaticResource ElementLabelTextStyle}">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+
+        <Style x:Key="HoursElementLabelTextStyle" TargetType="Label" BasedOn="{StaticResource ElementLabelTextStyle}">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="HoursElementLabelNumberStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <!--#endregion-->
+        
+        
+        <!--#region Border Styles-->
+        <Style x:Key="PaneBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFF4F4F4"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style x:Key="InnerPaneBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style x:Key="HoursElementBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource ElementColor}"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="2,0,0,0"/>
+        </Style>
+
+        <Style x:Key="PaneTitleLabelBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource ElementColor}"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="0,2,0,0"/>
+        </Style>
+        <!--#endregion-->
+        
+        
+        <!--#region Grid Styles-->
+        <Style x:Key="HoursGridStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="20,0,20,10"/>
         </Style>
         <!--#endregion-->
         

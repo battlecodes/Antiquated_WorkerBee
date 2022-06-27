@@ -11,14 +11,15 @@ namespace WorkerBee.Utilities
     {
 
         #region Fields
-
-        private Book _currentBook;
+        private Book? _currentBook;
         #endregion
 
 
         #region Properties
-
-        public Book CurrentBook { get; set; }
+        /// <summary>
+        /// Book reference for this instance.
+        /// </summary>
+        public Book? CurrentBook { get; set; }
         #endregion
     }
 }

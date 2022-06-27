@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using WorkerBee.ViewModels;
 
 namespace WorkerBee.Views
@@ -24,6 +25,19 @@ namespace WorkerBee.Views
         public CreateNewBookView()
         {
             InitializeComponent();
+        }
+
+        private void NameTextBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue)
+            {
+                Dispatcher.BeginInvoke(
+                    DispatcherPriority.ContextIdle,
+                    new Action(delegate ()
+                    {
+                        NameTextBox.Focus();
+                    }));
+            }
         }
     }
 }

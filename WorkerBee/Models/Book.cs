@@ -11,16 +11,16 @@ namespace WorkerBee.Models
 
         #region Properties
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
         public DateTime EndDate { get; set; }
 
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
 
-        public string SaveLocation { get; set; }
+        public string SaveLocation { get; set; } = string.Empty;
 
 
         public DateTime StartDate { get; set; }

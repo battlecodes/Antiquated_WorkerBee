@@ -21,7 +21,12 @@ namespace WorkerBee
         protected override void OnStartup(StartupEventArgs e)
         {
             BookStore bookStore = new();
+
+            // TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
             NavigationStore navigationStore = new();
+
+            //navigationStore.CurrentContentViewModel = new
+            //    DashboardViewModel(bookStore, navigationStore);
 
             navigationStore.CurrentContentViewModel = new
                 DashboardNoActiveBookViewModel(bookStore, navigationStore);

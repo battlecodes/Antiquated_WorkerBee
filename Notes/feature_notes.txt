@@ -1,2 +1,6 @@
 ***** CreateNewBookViewModel *****
 - The SaveLocationText should be set the user's "save location" preference.
+
+
+***** DashboardView *****
+- The hours totals elements should be their own custom controls....

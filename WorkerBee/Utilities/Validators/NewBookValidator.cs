@@ -20,16 +20,25 @@ namespace WorkerBee.Utilities.Validators
     {
 
         #region Properties
-
+        /// <summary>
+        /// Model whose properties are to be validated.
+        /// </summary>
         public CreateNewBookModel? Model { get; set; }
         #endregion
 
 
         #region Constructors
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewBookValidator"/>
+        /// class.
+        /// </summary>
         public NewBookValidator() { }
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewBookValidator"/>
+        /// class with a defined <seealso cref="Model"/>.
+        /// </summary>
+        /// <param name="model"></param>
         public NewBookValidator(CreateNewBookModel model)
         {
             Model = model;
@@ -38,7 +47,14 @@ namespace WorkerBee.Utilities.Validators
 
 
         #region Public Methods
-
+        /// <summary>
+        /// Tests if the <seealso cref="Model"/>'s properties are valid.
+        /// </summary>
+        /// <returns>(Tuple) False if the properties are invalid,
+        /// True otherwise, and the NewBookValidationError enum
+        /// for the invalid property.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if Model is
+        /// null.</exception>
         public (bool, NewBookValidationError) Validate()
         {
             // Check for null Model.
@@ -63,6 +79,15 @@ namespace WorkerBee.Utilities.Validators
             return (true, NewBookValidationError.None);
         }
 
+        /// <summary>
+        /// Tests if the <seealso cref="CreateNewBookModel"/>'s properties are valid.
+        /// </summary>
+        /// <param name="model">CreateNewBookModel to validate.</param>
+        /// <returns>(Tuple) False if the properties are invalid,
+        /// True otherwise, and the NewBookValidationError enum
+        /// for the invalid property.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if Model is
+        /// null.</exception>
         public (bool, NewBookValidationError) Validate(CreateNewBookModel model)
         {
             Model = model;
@@ -77,13 +102,23 @@ namespace WorkerBee.Utilities.Validators
 
 
         #region Private Methods
-
+        /// <summary>
+        /// Tests if the <seealso cref="Model"/>'s start and end
+        /// dates are chronological.
+        /// </summary>
+        /// <returns>True if the dates are chronological, False
+        /// otherwise.</returns>
         private bool ValidateDates()
         {
             return Model.StartDate <= Model.EndDate;
         }
 
-
+        /// <summary>
+        /// Tests if the <seealso cref="Model"/>'s save location is
+        /// a valid directory path.
+        /// </summary>
+        /// <returns>True if the location is a valid directory path,
+        /// False otherwise.</returns>
         private bool ValidateSaveLocation()
         {
             try

@@ -8,24 +8,37 @@ using WorkerBee.Navigation;
 using WorkerBee.Models;
 using WorkerBee.ViewModels;
 
-namespace WorkerBee.Utilities
+namespace WorkerBee.Utilities.Commands
 {
     public class CreateBookCommand : CommandBase
     {
 
         #region Fields
-
+        /// <summary>
+        /// BookStore reference for this instance.
+        /// </summary>
         private readonly BookStore _bookStore;
 
-
+        /// <summary>
+        /// CreateNewBookViewModel reference for this instance.
+        /// </summary>
         private readonly CreateNewBookViewModel _viewModel;
 
+        /// <summary>
+        /// NavigationService reference for this instance.
+        /// </summary>
         private readonly NavigationService<DashboardViewModel> _navigationService;
         #endregion
 
 
         #region Constructors
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateBookCommand"/>
+        /// class.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationService"></param>
         public CreateBookCommand(CreateNewBookViewModel viewModel,
             BookStore bookStore,
             NavigationService<DashboardViewModel> navigationService)
@@ -38,12 +51,17 @@ namespace WorkerBee.Utilities
 
 
         #region Public Methods
+        /// <summary>
+        /// Creates a new <see cref="Book"/> object, sets a reference of it
+        /// to <see cref="_bookStore.CurrentContentViewModel"/>, and calls
+        /// the <see cref="_navigationService.Navigate"/> method.
+        /// </summary>
+        /// <param name="parameter"></param>
         public override void Execute(object parameter)
         {
             // Create the new book and add it to the book store so that the
             // Dashboard view can access it.
             CreateNewBookModel model = _viewModel.Model;
-            MessageBox.Show($"Creating new logbook '{model.Name}'...");
             Book newBook = new()
             {
                 Description = model.Description,

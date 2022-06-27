@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WorkerBee.Utilities
+namespace WorkerBee.Utilities.Commands
 {
     public class RelayCommand : ICommand
     {
@@ -57,7 +57,7 @@ namespace WorkerBee.Utilities
         /// <returns>True if this command can be executed; otherwise false.</returns>
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((object)parameter);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace WorkerBee.Utilities
         /// require data to be passed, this object can be set to null.</param>
         public void Execute(object? parameter)
         {
-            _execute((object)parameter);
+            _execute(parameter);
         }
         #endregion
     }
